@@ -41,7 +41,7 @@ ui <- fluidPage(
 )
 
 # Define server logic required to draw a histogram
-server <- function(input, output) {
+server <- function(input, output, session) {
    
    output$dsh_name <- renderText({
      validate(

@@ -1,4 +1,4 @@
-$(document).on('shiny:sessioninitialized', function(event) {
+$(document).on('shiny:connected', function(event) {
   
   alert('Session initialized. Fetching datasource info...');
   
