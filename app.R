@@ -20,7 +20,7 @@ ui <- fluidPage(
   titlePanel("Shiny Extension!"),
   
   sidebarLayout(
-    actionButton(inputId = "extension-api-init", label = "Rev up those fryers!"),
+    sidebarPanel(actionButton(inputId = "extension-api-init", label = "Rev up those fryers!")),
   mainPanel(
     textOutput("dsh_name_display"),
     dataTableOutput("table_output")
@@ -40,6 +40,7 @@ server <- function(input, output, session) {
   output$table_output <- renderDataTable({
     input$data
   })
+  
 }
 
 # Run the application. 

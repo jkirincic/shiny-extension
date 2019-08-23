@@ -4,7 +4,7 @@ $(document).ready(function() {
     
     var dsh = tableau.extensions.dashboardContent.dashboard;
     var ds = dsh.worksheets[0].getDataSourcesAsync().then(
-      datasources => { myguy = datasources[0]; return myguy.getUnderlyingDataAsync();}
+      datasources => { myguy = datasources[0]; return myguy.getUnderlyingDataAsync(maxRows = 10);}
       );
     
     Shiny.setInputValue("data", ds);
