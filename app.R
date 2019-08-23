@@ -13,9 +13,11 @@ library(lubridate)
 
 # Define UI for application that draws a histogram
 ui <- fluidPage(
-   
+  
+  tags$script(src = "datasource-info.js"),
+  
    # Application title
-   titlePanel("Old Faithful Geyser Data"),
+   titlePanel("Shiny Extension!"),
    
    # Sidebar with a slider input for number of bins 
    sidebarLayout(
@@ -24,7 +26,8 @@ ui <- fluidPage(
                      "Number of bins:",
                      min = 1,
                      max = 50,
-                     value = 30)
+                     value = 30),
+         actionButton(inputId = "extension-api-init", label = "Rev up those fryers!")
       ),
       
       # Show a plot of the generated distribution
@@ -38,6 +41,10 @@ ui <- fluidPage(
 # Define server logic required to draw a histogram
 server <- function(input, output) {
    
+   output$dsh_name <- renderText({
+     input$dsh_name
+   })
+    
    output$distPlot <- renderPlot({
       # generate bins based on input$bins from ui.R
       x    <- faithful[, 2] 
