@@ -34,7 +34,8 @@ ui <- fluidPage(
       # Show a plot of the generated distribution
       mainPanel(
          plotOutput("distPlot"),
-         dataTableOutput("table_output")
+         dataTableOutput("table_output"),
+         textOutput("dsh_name")
       )
    )
 )
