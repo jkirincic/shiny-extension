@@ -33,7 +33,7 @@ ui <- fluidPage(
       
       # Show a plot of the generated distribution
       mainPanel(
-        textOutput("dsh_name"),
+        textOutput("dsh_name_display"),
         plotOutput("distPlot"),
         dataTableOutput("table_output")
       )
@@ -43,7 +43,7 @@ ui <- fluidPage(
 # Define server logic required to draw a histogram
 server <- function(input, output, session) {
    
-   output$dsh_name <- renderText({
+   output$dsh_name_display <- renderText({
      validate(
        need(input$dsh_name, "Something's whack, Jack. Summon the hounds.")
      )
