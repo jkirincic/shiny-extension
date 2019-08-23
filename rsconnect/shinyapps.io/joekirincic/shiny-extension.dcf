@@ -1,0 +1,13 @@
+name: shiny-extension
+title: shiny-extension
+username:
+account: joekirincic
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 1109271
+bundleId: 2348910
+url: https://joekirincic.shinyapps.io/shiny-extension/
+when: 1566577201.82312
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: app.R
