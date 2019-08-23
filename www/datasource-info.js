@@ -1,6 +1,15 @@
-$(document).on('shiny:connected', function(event) {
+$(document).ready(function() {
   
-  alert('Session initialized. Fetching datasource info...');
+  tableau.extensions.initializeAsync().then(function() {
+    
+    var dsh = tableau.extensions.dashboardContent.dashboard;
+    var ds = dsh.worksheets[0].getDataSourcesAsync().then(
+      datasources => { myguy = datasources[0]; return myguy.getUnderlyingDataAsync();}
+      );
+    
+    Shiny.setInputValue("data", ds);
+    
+  });
   
 });
 
