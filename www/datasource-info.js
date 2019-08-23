@@ -6,6 +6,6 @@ $(document).on('shiny:sessioninitialized', function(event) {
   
   var dsh = tableau.extensions.dashboardContent.dashboard;
   
-  Shiny.setInputValue("dsh_name", dsh.name)
+  Shiny.setInputValue("dsh_name", dsh.name);
   
 });

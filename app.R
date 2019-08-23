@@ -44,7 +44,9 @@ ui <- fluidPage(
 server <- function(input, output) {
    
    output$dsh_name <- renderText({
-     input$dsh_name
+     validate(
+       need(input$dsh_name, "Something's whack, Jack. Summon the hounds.")
+     )
    })
     
    output$distPlot <- renderPlot({
