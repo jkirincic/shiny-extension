@@ -15,6 +15,7 @@ library(lubridate)
 ui <- fluidPage(
   
   tags$script(src = "datasource-info.js"),
+  tags$script(src = "tableau.extensions.1.latest.js"),
   
    # Application title
    titlePanel("Shiny Extension!"),
