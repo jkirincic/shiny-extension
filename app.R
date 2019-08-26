@@ -16,7 +16,6 @@ library(lubridate)
 
 # Define UI for application that draws a histogram
 ui <- fluidPage(
-  useShinyjs(),
   tags$script(src = "datasource-info.js"),
   tags$script(src = "tableau.extensions.1.latest.js"),
   
@@ -35,14 +34,9 @@ ui <- fluidPage(
 server <- function(input, output, session) {
   
   output$rslt <- renderPrint({
-    runjs(code = "tableau.extensions.initializeAsync().then(function(){
-  const dsh = tableau.extensions.dashboardContent.dashboard
-          ds = dsh.worksheets[0].getDatasourcesAsync().then(function(datasources){
-          datasources[0].getUnderlyingDatasources(maxRows = 10).then(function(datasource){
-          return datasource._data
-          })
-          })
-  })")
+    validate(
+      need(input$data, "Not finding anything...")
+    )
   })
   
   output$dsh_name_display <- renderText({
