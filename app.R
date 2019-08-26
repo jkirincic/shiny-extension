@@ -16,13 +16,17 @@ library(lubridate)
 
 # Define UI for application that draws a histogram
 ui <- fluidPage(
+  useShinyjs(),
   tags$script(src = "datasource-info.js"),
   tags$script(src = "tableau.extensions.1.latest.js"),
   
   titlePanel("Shiny Extension!"),
   
   sidebarLayout(
-    sidebarPanel(actionButton(inputId = "extension_api_init", label = "Start")),
+    sidebarPanel(
+      actionButton(inputId = "extension_api_init", label = "Start"),
+      runcodeUI(code = "shinyjs::alert('Hello!')")
+    ),
   mainPanel(
     textOutput("dsh_name_display"),
     textOutput("rslt")
@@ -44,6 +48,8 @@ server <- function(input, output, session) {
       need(str(input$data), "Not finding anything...")
     )
   })
+  
+  runcodeServer()
   
 }
 

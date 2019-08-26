@@ -28,8 +28,8 @@ $(document).ready(function() {
 
       // something went wrong in initialization
       $("#dsh_name_display").html("Error while Initializing: " + err.toString());
+      Shiny.setInputValue("data", payload[0]);
     });
-    Shiny.setInputValue("data", payload[0]);
   });
 });
 
