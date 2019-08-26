@@ -29,7 +29,7 @@ ui <- fluidPage(
     ),
   mainPanel(
     textOutput("dsh_name_display"),
-    textOutput("rslt")
+    DT::DTOutput("rslt")
   )
 )
 )
@@ -37,16 +37,30 @@ ui <- fluidPage(
 # Define server logic.
 server <- function(input, output, session) {
   
+  json_dump <- reactiveVal()
+  
+  df <- reactive({
+    result <- json_dump(input$data) %>%
+      jsonlite::fromJSON() %>%
+      `[[`('_data') %>%
+      map_dfr(
+        .f = function(x){
+          pull(x, `_formattedValue`) %>%
+            t() %>%
+            as_tibble()
+        }
+      )
+    return(DT::datatable(result))
+  })
+  
   output$dsh_name_display <- renderText({
     validate(
       need(input$dsh_name, "Something's whack, Jack. Summon the hounds.")
     )
   })
   
-  output$rslt <- renderPrint({
-    validate(
-      need(input$data, "Not finding anything...")
-    )
+  output$rslt <- DT::renderDT({
+    df()
   })
   
   runcodeServer()

@@ -15,8 +15,8 @@ $(document).ready(function() {
     var step1 = dashboard.worksheets[0].getDataSourcesAsync();
     var step2 = step1.then(function(x){ return x[0] });
     var step3 = step2.then(function(x){ return x.getUnderlyingDataAsync() });
-    var step4 = step3.then(function(x){ return x._data });
-    step4.then(function(x){ payload.push(x);  Shiny.setInputValue("data", payload);});
+    step3.then(function(x){ payload.push(x); Shiny.setInputValue("data", payload[0]);});
+    
     
     // Display the name of dashboard in the UI
     $("#dsh_name_display").html("I'm running in a dashboard named <strong>" + dashboard.name + "</strong>");
