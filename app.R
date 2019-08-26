@@ -34,25 +34,15 @@ ui <- fluidPage(
 # Define server logic.
 server <- function(input, output, session) {
   
-  thing <- eventReactive(
-    input$extensions_api_init, {
-      ds <- runjs(code = "tableau.extensions.initializeAsync().then(function(){
-  const dsh = tableau.extensions.dashboardContent.dashboard
-                  ds = dsh.worksheets[0].getDatasourcesAsync().then(function(datasources){
-                  datasources[0].getUnderlyingDatasources(maxRows = 10).then(function(datasource){
-                  return datasource._data
-                  })
-                  })
-    })")
-      ds
-  })
-  
   output$rslt <- renderPrint({
-    if(is.null(thing)){
-      "Nothing here."
-    }else{
-      thing
-    }
+    runjs(code = "tableau.extensions.initializeAsync().then(function(){
+  const dsh = tableau.extensions.dashboardContent.dashboard
+          ds = dsh.worksheets[0].getDatasourcesAsync().then(function(datasources){
+          datasources[0].getUnderlyingDatasources(maxRows = 10).then(function(datasource){
+          return datasource._data
+          })
+          })
+  })")
   })
   
   output$dsh_name_display <- renderText({
