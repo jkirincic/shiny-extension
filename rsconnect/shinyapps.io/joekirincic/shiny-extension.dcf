@@ -5,9 +5,9 @@ account: joekirincic
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 1109271
-bundleId: 2355431
+bundleId: 2355458
 url: https://joekirincic.shinyapps.io/shiny-extension/
-when: 1566803109.94838
+when: 1566803841.99162
 asMultiple: FALSE
 asStatic: FALSE
 ignoredFiles: shiny-extension.trex

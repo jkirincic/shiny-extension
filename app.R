@@ -45,7 +45,7 @@ server <- function(input, output, session) {
   
   output$rslt <- renderPrint({
     validate(
-      need(str(input$data), "Not finding anything...")
+      need(input$data, "Not finding anything...")
     )
   })
   
