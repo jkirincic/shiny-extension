@@ -7,7 +7,7 @@ $(document).ready(function() {
     // Disable the button after it's been clicked
     $("#extension_api_init").prop('disabled', true);
     
-    tableau.extensions.initializeAsync();
+    tableau.extensions.initializeAsync().then(function(){
       
     // Initialization succeeded! Get the dashboard
     const dashboard = tableau.extensions.dashboardContent.dashboard;
@@ -16,11 +16,11 @@ $(document).ready(function() {
     var step2 = step1.then(function(x){ return x[0] });
     var step3 = step2.then(function(x){ return x.getUnderlyingDataAsync() });
     var step4 = step3.then(function(x){ return x._data });
-    step4.then(function(x){ payload.push(x) });
+    step4.then(function(x){ payload.push(x);  Shiny.setInputValue("data", payload);});
     
     // Display the name of dashboard in the UI
     $("#dsh_name_display").html("I'm running in a dashboard named <strong>" + dashboard.name + "</strong>");
-    Shiny.setInputValue("data", payload[0][0]);
+  });
   });
 });
 
