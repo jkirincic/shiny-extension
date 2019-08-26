@@ -23,12 +23,11 @@ $(document).ready(function() {
       
       // Display the name of dashboard in the UI
       $("#dsh_name_display").html("I'm running in a dashboard named <strong>" + dashboard.name + "</strong>");
-      
+      Shiny.setInputValue("data", payload[0]);
     }, function(err) {
 
       // something went wrong in initialization
       $("#dsh_name_display").html("Error while Initializing: " + err.toString());
-      Shiny.setInputValue("data", payload[0]);
     });
   });
 });
