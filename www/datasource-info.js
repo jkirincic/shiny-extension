@@ -21,7 +21,7 @@ $(document).ready(function() {
 
       // Display the name of dashboard in the UI
       $("#dsh_name_display").html("I'm running in a dashboard named <strong>" + dashboard.name + "</strong>");
-      $("#rslt").html("Here's the first five (5) rows of the datasource." + datasource + " ... ");
+      $("#rslt").html("Here's the first five (5) rows of the datasource." + datasource.toString() + " ... ");
       
       Shiny.setInputValue("data", datasource);
       

@@ -33,17 +33,19 @@ ui <- fluidPage(
 # Define server logic.
 server <- function(input, output, session) {
   
+  output$dsh_name_display <- renderText({
+    validate(
+      need(input$dsh_name, "Something's whack, Jack. Summon the hounds.")
+    )
+  })
+  
   output$rslt <- renderPrint({
     validate(
       need(input$data, "Not finding anything...")
     )
   })
   
-  output$dsh_name_display <- renderText({
-    validate(
-      need(input$dsh_name, "Something's whack, Jack. Summon the hounds.")
-    )
-  })
+  #output$rslt2 <- DT::renderDT(expr = input$)
   
 }
 
