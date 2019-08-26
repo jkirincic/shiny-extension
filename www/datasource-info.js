@@ -6,10 +6,10 @@ $(document).ready(function() {
 
     // Disable the button after it's been clicked
     $("#extension_api_init").prop('disabled', true);
-
+    
+    var payload = [];
+    
     tableau.extensions.initializeAsync().then(function() {
-      
-      payload = [];
       
       // Initialization succeeded! Get the dashboard
       const dashboard = tableau.extensions.dashboardContent.dashboard;
@@ -21,19 +21,15 @@ $(document).ready(function() {
         });
       });
       
-      var ds = payload[0];
-      
       // Display the name of dashboard in the UI
       $("#dsh_name_display").html("I'm running in a dashboard named <strong>" + dashboard.name + "</strong>");
-      $("#rslt").html("Here's the first five (5) rows of the datasource." + ds.toString() + " ... ");
-      
-      Shiny.setInputValue("data", ds);
       
     }, function(err) {
 
       // something went wrong in initialization
       $("#dsh_name_display").html("Error while Initializing: " + err.toString());
     });
+    Shiny.setInputValue("data", payload[0]);
   });
 });
 

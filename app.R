@@ -41,11 +41,9 @@ server <- function(input, output, session) {
   
   output$rslt <- renderPrint({
     validate(
-      need(input$data, "Not finding anything...")
+      need(str(input$data), "Not finding anything...")
     )
   })
-  
-  #output$rslt2 <- DT::renderDT(expr = input$)
   
 }
 
