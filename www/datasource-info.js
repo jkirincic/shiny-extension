@@ -1,26 +1,11 @@
 $(document).ready(function() {
-  
-  tableau.extensions.initializeAsync().then(function() {
-    
-    var dsh = tableau.extensions.dashboardContent.dashboard;
-    var ds = dsh.worksheets[0].getDataSourcesAsync().then(
-      datasources => { myguy = datasources[0]; return myguy.getUnderlyingDataAsync(maxRows = 10);}
-      );
-    
-    Shiny.setInputValue("data", ds);
-    
-  });
-  
-});
-
-$(document).ready(function() {
 
   // Hook up an event handler for the load button click.
   // Wait to initialize until the button is clicked.
   $("#extension-api-init").click(function() {
 
     // Disable the button after it's been clicked
-    $("#extension-api-init").prop('disabled', true);
+    $("#extension_api_init").prop('disabled', true);
 
     tableau.extensions.initializeAsync().then(function() {
 

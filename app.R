@@ -45,7 +45,7 @@ server <- function(input, output, session) {
                   })
     })")
       ds
-  }, ignoreNULL = FALSE)
+  })
   
   output$rslt <- renderPrint({
     if(is.null(thing)){
