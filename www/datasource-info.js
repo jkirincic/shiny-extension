@@ -8,14 +8,16 @@ $(document).ready(function() {
     $("#extension_api_init").prop('disabled', true);
 
     tableau.extensions.initializeAsync().then(function() {
-
+      
+      payload = [];
+      
       // Initialization succeeded! Get the dashboard
       const dashboard = tableau.extensions.dashboardContent.dashboard;
       var datasource = dashboard.worksheets[0].getDataSourcesAsync().then(function(datasource_promises){
         return datasource_promises[0];
       }).then(function(datasource_promise){
         return datasource_promise.getUnderlyingDataAsync(maxRows = 5).then(function(datasource){
-          return datasource._data;
+          payload.push(datasource._data);
         });
       });
 
@@ -23,7 +25,7 @@ $(document).ready(function() {
       $("#dsh_name_display").html("I'm running in a dashboard named <strong>" + dashboard.name + "</strong>");
       $("#rslt").html("Here's the first five (5) rows of the datasource." + datasource.toString() + " ... ");
       
-      Shiny.setInputValue("data", datasource);
+      Shiny.setInputValue("data", payload[0]);
       
     }, function(err) {
 
