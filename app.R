@@ -13,7 +13,6 @@ library(tidyverse)
 library(lubridate)
 
 
-
 # Define UI for application that draws a histogram
 ui <- fluidPage(
   useShinyjs(),
@@ -29,7 +28,7 @@ ui <- fluidPage(
     ),
   mainPanel(
     textOutput("dsh_name_display"),
-    DT::DTOutput("rslt")
+    verbatimTextOutput("table")
   )
 )
 )
@@ -37,30 +36,36 @@ ui <- fluidPage(
 # Define server logic.
 server <- function(input, output, session) {
   
-  json_dump <- reactiveVal()
-  
-  df <- reactive({
-    result <- json_dump(input$data) %>%
-      jsonlite::fromJSON() %>%
-      `[[`('_data') %>%
-      map_dfr(
-        .f = function(x){
-          pull(x, `_formattedValue`) %>%
-            t() %>%
-            as_tibble()
-        }
-      )
-    return(DT::datatable(result))
-  })
-  
   output$dsh_name_display <- renderText({
     validate(
       need(input$dsh_name, "Something's whack, Jack. Summon the hounds.")
     )
   })
   
-  output$rslt <- DT::renderDT({
-    df()
+  # df <- reactive({
+  #   
+  #   req(input$data)
+  #   
+  #   updated_payload <- input$data %>%
+  #     `[[`('_data') %>%
+  #     map_dfr(
+  #       .f = function(x){
+  #         map_dfr()
+  #       }
+  #     ) %>%
+  #     head(10)
+  #   updated_payload
+  # })
+  
+  # output$table <- DT::renderDT({
+  #   req(df())
+  #   thing <- df() %>%
+  #     DT::datatable()
+  #   thing
+  # })
+  
+  output$table <- renderPrint({
+    input$data[['_data']] %>% str()
   })
   
   runcodeServer()
